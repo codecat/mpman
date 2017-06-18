@@ -4,7 +4,7 @@ import "fmt"
 import "os"
 import "os/exec"
 
-import "nimble/log"
+import "github.com/codecat/go-libs/log"
 
 type MPServer struct {
 	Info Row

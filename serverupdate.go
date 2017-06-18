@@ -6,7 +6,7 @@ import "net/http"
 import "archive/zip"
 import "path/filepath"
 
-import "nimble/log"
+import "github.com/codecat/go-libs/log"
 
 const serverUpdateLocation = "tmp/ManiaplanetServer_Latest.zip"
 

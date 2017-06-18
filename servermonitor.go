@@ -2,7 +2,7 @@ package main
 
 import "time"
 
-import "nimble/log"
+import "github.com/codecat/go-libs/log"
 
 var runningServers []*MPServer
 

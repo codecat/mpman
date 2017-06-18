@@ -3,7 +3,7 @@ package main
 import "os"
 import "io/ioutil"
 
-import "nimble/log"
+import "github.com/codecat/go-libs/log"
 import "gopkg.in/yaml.v2"
 
 type ConfigPack struct {

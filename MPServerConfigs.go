@@ -4,7 +4,7 @@ import "fmt"
 import "bufio"
 import "os"
 
-import "nimble/log"
+import "github.com/codecat/go-libs/log"
 
 func (self *MPServer) WriteConfig(fnm string) bool {
 	out, err := os.Create(fnm)

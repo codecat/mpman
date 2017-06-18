@@ -5,7 +5,7 @@ import "database/sql"
 import "reflect"
 
 import _ "github.com/go-sql-driver/mysql"
-import "nimble/log"
+import "github.com/codecat/go-libs/log"
 
 type Row map[string]interface{}
 

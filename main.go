@@ -1,6 +1,6 @@
 package main
 
-import "nimble/log"
+import "github.com/codecat/go-libs/log"
 
 var keepRunning = true
 
