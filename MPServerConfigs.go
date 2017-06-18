@@ -140,7 +140,7 @@ func (self *MPServer) WriteMatchSettings(fnm string) bool {
 	w := bufio.NewWriter(out)
 	defer w.Flush()
 
-	fmt.Fprintf(w, "<?xml version=\"1.0\" encoding=\"utf-8\"?>")
+	fmt.Fprintf(w, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
 	fmt.Fprintf(w, "<playlist>\n")
 
 	// Game info
