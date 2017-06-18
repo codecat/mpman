@@ -33,8 +33,16 @@ func dbOpen() {
 	}
 }
 
+func dbExec(query string, args ...interface{}) {
+	_, err := db.Exec(query, args...)
+	if err != nil {
+		log.Error("Query error: %s", err.Error())
+		log.Debug("Query was: \"%s\"", query)
+	}
+}
+
 func dbQuery(query string, args ...interface{}) []Row {
-	rows, err := db.Query(query)
+	rows, err := db.Query(query, args...)
 	if err != nil {
 		log.Error("Query error: %s", err.Error())
 		log.Debug("Query was: \"%s\"", query)
