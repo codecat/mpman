@@ -31,15 +31,22 @@ func dbOpen() bool {
 		log.Fatal("Failed to connect to database: %s", err.Error())
 		return false
 	}
+
+	if !dbExec("SELECT 1") {
+		return false
+	}
+
 	return true
 }
 
-func dbExec(query string, args ...interface{}) {
+func dbExec(query string, args ...interface{}) bool {
 	_, err := db.Exec(query, args...)
 	if err != nil {
 		log.Error("Query error: %s", err.Error())
 		log.Debug("Query was: \"%s\"", query)
+		return false
 	}
+	return true
 }
 
 func dbQuery(query string, args ...interface{}) []Row {
