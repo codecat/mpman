@@ -24,13 +24,14 @@ func dbMakeDsn() string {
 	return ret
 }
 
-func dbOpen() {
+func dbOpen() bool {
 	var err error
 	db, err = sql.Open("mysql", dbMakeDsn())
 	if err != nil {
 		log.Fatal("Failed to connect to database: %s", err.Error())
-		return
+		return false
 	}
+	return true
 }
 
 func dbExec(query string, args ...interface{}) {
