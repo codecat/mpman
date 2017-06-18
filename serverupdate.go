@@ -147,6 +147,11 @@ func serverUpdateCheck() {
 		return
 	}
 
+	if Config.Server.Version != "" && !pathExists("server/ManiaPlanetServer") {
+		log.Warn("Server has a version, but server has not been downloaded; config conflict, forcing update!")
+		Config.Server.Version = ""
+	}
+
 	if lastModified == Config.Server.Version {
 		log.Info("Server is up to date: \"%s\"", lastModified)
 		return
@@ -263,6 +268,11 @@ func packUpdateCheck(id string) {
 			needsToUpdate = false
 			break
 		}
+	}
+
+	if !needsToUpdate && !pathExists("server/UserData/Packs/" + id + ".Title.Pack.Gbx") {
+		log.Warn("Maniaplanet pack has a version, but pack has not been downloaded; config conflict, forcing update!")
+		needsToUpdate = true
 	}
 
 	if !needsToUpdate {
