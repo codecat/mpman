@@ -203,7 +203,12 @@ func downloadPackUpdate(id string) bool {
 
 func movePackUpdate(id string) bool {
 	source := "tmp/" + id + ".Title.Pack.Gbx"
-	target := "server/UserData/Packs/" + id + ".Title.Pack.Gbx"
+	targetDir := "server/UserData/Packs/"
+	target := targetDir + id + ".Title.Pack.Gbx"
+
+	if !pathExists(targetDir) {
+		os.Mkdir(targetDir, os.ModePerm)
+	}
 
 	err := os.Rename(source, target)
 	if err != nil {
