@@ -10,7 +10,7 @@ import "github.com/codecat/go-libs/log"
 func (self *MPServer) WriteConfig(fnm string) bool {
 	targetDir := filepath.Dir(fnm)
 	if !pathExists(targetDir) {
-		os.Mkdir(targetDir, os.ModePerm)
+		os.MkdirAll(targetDir, os.ModePerm)
 	}
 
 	out, err := os.Create(fnm)
@@ -127,7 +127,7 @@ func (self *MPServer) WriteConfig(fnm string) bool {
 func (self *MPServer) WriteMatchSettings(fnm string) bool {
 	targetDir := filepath.Dir(fnm)
 	if !pathExists(targetDir) {
-		os.Mkdir(targetDir, os.ModePerm)
+		os.MkdirAll(targetDir, os.ModePerm)
 	}
 
 	out, err := os.Create(fnm)
