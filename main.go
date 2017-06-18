@@ -19,7 +19,10 @@ func main() {
 	log.Config.MinLevel = Config.MinLogLevel
 	log.Config.MaxLevel = Config.MaxLogLevel
 
-	dbOpen()
+	if !dbOpen() {
+		log.Fatal("Could not connect to database")
+		return
+	}
 
 	log.Info("Performing initial server update check")
 	serverUpdateCheck()
