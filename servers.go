@@ -2,8 +2,6 @@ package main
 
 import "time"
 
-var keepRunning = true
-
 func startServer() {
 	//
 }

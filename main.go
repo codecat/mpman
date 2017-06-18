@@ -2,6 +2,8 @@ package main
 
 import "nimble/log"
 
+var keepRunning = true
+
 func main() {
 	log.Open(log.CatTrace, log.CatFatal)
 	log.Info("Initializing")
@@ -13,6 +15,8 @@ func main() {
 	} else if !loadConfig("config.yaml") {
 		return
 	}
+
+	dbOpen()
 
 	log.Info("Performing initial server update check")
 	serverUpdateCheck()

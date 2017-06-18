@@ -14,6 +14,7 @@ var Config struct {
 
 	Database struct {
 		Hostname string
+		Port int
 		Username string
 		Password string
 		Database string
@@ -22,6 +23,11 @@ var Config struct {
 
 func loadConfigDefaults() {
 	Config.Server.LatestURL = "http://files.v04.maniaplanet.com/server/ManiaplanetServer_Latest.zip"
+
+	Config.Database.Hostname = "localhost"
+	Config.Database.Port = 3306
+	Config.Database.Username = "root"
+	Config.Database.Database = "mpman"
 }
 
 func readConfigFile(fnm string) []byte {
