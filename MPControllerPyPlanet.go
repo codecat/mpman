@@ -29,6 +29,7 @@ func (self *PyPlanetController) GetDatabaseName() string {
 }
 
 func (self *PyPlanetController) EnsureDatabaseExists() bool {
+	//TODO: Fuck MySQL.
 	name := self.GetDatabaseName()
 
 	res := dbQuery("SHOW DATABASES WHERE `Database`=?", name)
@@ -93,6 +94,7 @@ func (self *PyPlanetController) WriteConfig() bool {
 	}
 	fmt.Fprintf(w, "]}\n")
 
+	//TODO: Fuck MySQL. Use some local database isntead.
 	fmt.Fprintf(w, "DATABASES = { 'default': {\n")
 	fmt.Fprintf(w, "  'ENGINE': 'peewee_async.MySQLDatabase',\n")
 	fmt.Fprintf(w, "  'NAME': '%s',\n", self.GetDatabaseName())
