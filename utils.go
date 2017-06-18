@@ -1,6 +1,7 @@
 package main
 
 import "os"
+import "time"
 import "math/rand"
 
 func pathExists(path string) bool {
@@ -21,4 +22,8 @@ func genPassword(n int) string {
 		ret[i] = genPasswordLetters[rand.Intn(len(genPasswordLetters))]
 	}
 	return string(ret)
+}
+
+func seedRandom() {
+	rand.Seed(time.Now().UTC().UnixNano())
 }

@@ -15,6 +15,8 @@ type MPServer struct {
 		SuperAdmin string
 		Admin string
 	}
+
+	Controller MPController
 }
 
 func (self *MPServer) Configure() bool {
@@ -49,6 +51,16 @@ func (self *MPServer) Configure() bool {
 		return false
 	}
 
+	switch self.Info["Controller"].(string) {
+		case "pyplanet": self.Controller = new(PyPlanetController)
+	}
+	if self.Controller != nil {
+		log.Info("Configuring server controller \"%s\"", self.Info["Controller"].(string))
+		if !self.Controller.Configure(self) {
+			log.Warn("Server controller could not be configured!")
+		}
+	}
+
 	self.Configured = true
 	return true
 }
@@ -75,6 +87,10 @@ func (self *MPServer) Start() {
 		}
 		self.Command = nil
 	}(self)
+
+	if self.Controller != nil {
+		self.Controller.Start()
+	}
 }
 
 func (self *MPServer) Stop() {
@@ -82,7 +98,12 @@ func (self *MPServer) Stop() {
 		log.Warn("Tried stopping server \"%s\" which is not running!", self.Name())
 		return
 	}
+
 	//
+
+	if self.Controller != nil {
+		self.Controller.Stop()
+	}
 }
 
 func (self *MPServer) ID() int {

@@ -93,7 +93,7 @@ func (self *MPServer) WriteConfig(fnm string) bool {
 	fmt.Fprintf(w, "    <server_port>%d</server_port>\n", self.Info["Port"].(int))
 	fmt.Fprintf(w, "    <server_p2p_port>%d</server_p2p_port>\n", self.Info["PortP2P"].(int))
 	fmt.Fprintf(w, "    <xmlrpc_port>%d</xmlrpc_port>\n", self.Info["PortRPC"].(int))
-	fmt.Fprintf(w, "    <xmlrpc_allowremote>127.0.0.1</xmlrpc_allowremote>\n")
+	fmt.Fprintf(w, "    <xmlrpc_allowremote>False</xmlrpc_allowremote>\n")
 
 	fmt.Fprintf(w, "    <connection_uploadrate>8000</connection_uploadrate>\n")
 	fmt.Fprintf(w, "    <connection_downloadrate>8000</connection_downloadrate>\n")

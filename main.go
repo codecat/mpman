@@ -5,6 +5,8 @@ import "github.com/codecat/go-libs/log"
 var keepRunning = true
 
 func main() {
+	seedRandom()
+
 	log.Open(log.CatTrace, log.CatFatal)
 	log.Info("Initializing")
 
