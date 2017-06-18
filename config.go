@@ -6,10 +6,20 @@ import "io/ioutil"
 import "nimble/log"
 import "gopkg.in/yaml.v2"
 
+type ConfigPack struct {
+	ID string
+	Version string
+}
+
 var Config struct {
+	MinLogLevel int
+	MaxLogLevel int
+
 	Server struct {
-		LatestURL string
+		LatestURL string //TODO: Remove this one
 		Version string
+
+		Packs []ConfigPack
 	}
 
 	Database struct {
@@ -22,6 +32,9 @@ var Config struct {
 }
 
 func loadConfigDefaults() {
+	Config.MinLogLevel = log.CatTrace
+	Config.MaxLogLevel = log.CatFatal
+
 	Config.Server.LatestURL = "http://files.v04.maniaplanet.com/server/ManiaplanetServer_Latest.zip"
 
 	Config.Database.Hostname = "localhost"
@@ -30,8 +43,8 @@ func loadConfigDefaults() {
 	Config.Database.Database = "mpman"
 }
 
-func readConfigFile(fnm string) []byte {
-	configData, err := ioutil.ReadFile(fnm)
+func readConfigFile() []byte {
+	configData, err := ioutil.ReadFile("config.yaml")
 	if err != nil {
 		log.Fatal("Couldn't read config file: %s", err.Error())
 		return nil
@@ -39,8 +52,8 @@ func readConfigFile(fnm string) []byte {
 	return []byte(configData)
 }
 
-func loadConfig(fnm string) bool {
-	configData := readConfigFile(fnm)
+func loadConfig() bool {
+	configData := readConfigFile()
 	if configData == nil {
 		return false
 	}
@@ -55,14 +68,14 @@ func loadConfig(fnm string) bool {
 	return true
 }
 
-func saveConfig(fnm string) bool {
+func saveConfig() bool {
 	configData, err := yaml.Marshal(Config)
 	if err != nil {
 		log.Fatal("Couldn't marshal yaml data: %s", err.Error())
 		return false
 	}
 
-	err = ioutil.WriteFile(fnm, configData, os.ModePerm)
+	err = ioutil.WriteFile("config.yaml", configData, os.ModePerm)
 	if err != nil {
 		log.Fatal("Couldn't write to file: %s", err.Error())
 		return false

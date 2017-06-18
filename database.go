@@ -56,7 +56,7 @@ func dbQuery(query string, args ...interface{}) []Row {
 	row := make([]interface{}, len(cols), len(cols))
 	for i, t := range colTypes {
 		switch vt := t.ScanType(); vt {
-			case reflect.TypeOf(int32(0)): row[i] = new(int32)
+			case reflect.TypeOf(int32(0)): row[i] = new(int)
 			case reflect.TypeOf(string("")): row[i] = new(string)
 			default: log.Warn("Unhandled set-up type %s", vt.Name())
 		}
@@ -74,7 +74,7 @@ func dbQuery(query string, args ...interface{}) []Row {
 		newRow := Row{}
 		for i, t := range colTypes {
 			switch vt := t.ScanType(); vt {
-				case reflect.TypeOf(int32(0)): newRow[cols[i]] = *row[i].(*int32)
+				case reflect.TypeOf(int32(0)): newRow[cols[i]] = *row[i].(*int)
 				case reflect.TypeOf(string("")): newRow[cols[i]] = *row[i].(*string)
 				default: log.Warn("Unhandled unmarshal type %s", vt.Name())
 			}

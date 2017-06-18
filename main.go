@@ -12,19 +12,20 @@ func main() {
 
 	if !pathExists("config.yaml") {
 		log.Info("No config.yaml found - using empty config")
-	} else if !loadConfig("config.yaml") {
+	} else if !loadConfig() {
 		return
 	}
+
+	log.Config.MinLevel = Config.MinLogLevel
+	log.Config.MaxLevel = Config.MaxLogLevel
 
 	dbOpen()
 
 	log.Info("Performing initial server update check")
 	serverUpdateCheck()
 
-	saveConfig("config.yaml")
-
 	serverMonitor()
 
 	log.Info("Shutting down")
-	saveConfig("config.yaml")
+	saveConfig()
 }
