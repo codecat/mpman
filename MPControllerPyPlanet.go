@@ -162,13 +162,11 @@ func (self *PyPlanetController) Start() {
 		//TODO: PyPlanet requires a bit of a delay after starting the MP server: https://github.com/PyPlanet/PyPlanet/issues/386
 		// From my testing it takes Maniaplanet 8 seconds to start the XMLRPC port
 		time.Sleep(12000 * time.Millisecond)
-		for self.KeepRunning {
-			err := self.Command.Run()
-			if err != nil {
-				log.Warn("PyPlanet did not exit cleanly: %s", err.Error())
-			}
-			log.Info("PyPlanet exited")
+		err := self.Command.Run()
+		if err != nil {
+			log.Warn("PyPlanet did not exit cleanly: %s", err.Error())
 		}
+		log.Info("PyPlanet exited")
 	}(self)
 }
 
