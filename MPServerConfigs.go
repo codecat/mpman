@@ -3,10 +3,16 @@ package main
 import "fmt"
 import "bufio"
 import "os"
+import "path/filepath"
 
 import "github.com/codecat/go-libs/log"
 
 func (self *MPServer) WriteConfig(fnm string) bool {
+	targetDir := filepath.Dir(fnm)
+	if !pathExists(targetDir) {
+		os.Mkdir(targetDir, os.ModePerm)
+	}
+
 	out, err := os.Create(fnm)
 	if err != nil {
 		log.Fatal("Couldn't create config file \"%s\": %s", fnm, err.Error())
@@ -119,6 +125,11 @@ func (self *MPServer) WriteConfig(fnm string) bool {
 }
 
 func (self *MPServer) WriteMatchSettings(fnm string) bool {
+	targetDir := filepath.Dir(fnm)
+	if !pathExists(targetDir) {
+		os.Mkdir(targetDir, os.ModePerm)
+	}
+
 	out, err := os.Create(fnm)
 	if err != nil {
 		log.Fatal("Couldn't create match settings file \"%s\": %s", fnm, err.Error())
